@@ -24,35 +24,46 @@ namespace ClinicWebApp.Controllers
         [HttpPost("add")]
         public IActionResult AddPatient(string name, int age, string gender)
         {
-            var Patient = new Patient
+            var patient = new Patient
             {
                 Name = name,
                 Age = age,
                 Gender = gender
             };
 
-            _patientService.AddPatient(Patient);
-            // Returns a 200 OK response when the patient is successfully added
-            return Created();
+            // Calls the AddPatient method of the patient service to add the patient
+            _patientService.AddPatient(patient);
+
+            // Returns a Created response indicating that the resource was successfully created
+            return CreatedAtAction(nameof(GetPatient), new { patientId = patient.PID }, patient);
         }
 
         // Endpoint to retrieve a patient by their unique ID
         [HttpGet("{patientId}")]
-        public void GetPatient(int patientId)
+        public ActionResult<Patient> GetPatient(int patientId)
         {
             // Retrieves the patient by ID from the patient service
-            _patientService.GetPatientById(patientId);
+            var patient = _patientService.GetPatientById(patientId);
+
+            if (patient == null)
+            {
+                return NotFound(); // Returns a 404 if the patient is not found
+            }
+
+            // Returns the patient as a 200 OK response
+            return Ok(patient);
         }
 
         // Endpoint to retrieve all patients
         [HttpGet]
-        public IActionResult GetAllPatients()
+        public ActionResult<IEnumerable<Patient>> GetAllPatients()
         {
             // Retrieves all patients from the patient service
             var patients = _patientService.GetAllPatients();
 
-            // Returns the list of patients as a 200 OK response
+            // Returns the patients as a 200 OK response
             return Ok(patients);
         }
     }
+
 }

@@ -25,16 +25,16 @@ namespace ClinicWebApp.Services
         }
 
         // Method to retrieve a patient by their unique ID by delegating the operation to the repository
-        public void GetPatientById(int patientId)
+        public Patient GetPatientById(int patientId)
         {
             // Calls the GetPatientById method of the patient repository to get the patient by ID
-            _patientRepo.GetPatientById(patientId);
+            return _patientRepo.GetPatientById(patientId);
         }
 
         // Method to retrieve all patients by delegating the operation to the repository
         public IEnumerable<Patient> GetAllPatients()
         {
-            // Calls the GetAllPatientsAsync method of the patient repository to get a list of all patients
+            // Calls the GetAllPatients method of the patient repository to get a list of all patients
             return _patientRepo.GetAllPatients();
         }
     }

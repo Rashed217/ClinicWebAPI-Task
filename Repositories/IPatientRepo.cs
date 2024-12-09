@@ -6,6 +6,6 @@ namespace ClinicWebApp.Repositories
     {
         void AddPatient(Patient patient);
         IEnumerable<Patient> GetAllPatients();
-        void GetPatientById(int patientId);
+        Patient GetPatientById(int patientId);
     }
 }

@@ -17,31 +17,31 @@ namespace ClinicWebApp.Repositories
             _context = context;
         }
 
-        // Method to add a new Patient to the database asynchronously
+        // Method to add a new Patient to the database
         public void AddPatient(Patient patient)
         {
             // Adds the given patient entity to the Patients DbSet in the context
             _context.Patients.Add(patient);
 
-            // Saves the changes to the database asynchronously
+            // Saves the changes to the database
             _context.SaveChanges();
         }
 
-        // Method to retrieve a Patient by their unique ID asynchronously
-        public void GetPatientById(int patientId)
+        // Method to retrieve a Patient by their unique ID
+        public Patient GetPatientById(int patientId)
         {
-            // Finds a patient by their ID in the Patients DbSet asynchronously
+            // Finds a patient by their ID in the Patients DbSet
             // If no patient is found, it returns null
-            _context.Patients.Find(patientId);
+            return _context.Patients.Find(patientId);
         }
 
-        // Method to retrieve all Patients from the database asynchronously
+        // Method to retrieve all Patients from the database
         public IEnumerable<Patient> GetAllPatients()
         {
-            // Retrieves all patients from the Patients DbSet asynchronously
-            // The ToListAsync method converts the DbSet into a list of patients
+            // Retrieves all patients from the Patients DbSet
             return _context.Patients.ToList();
         }
     }
+
 
 }

@@ -30,25 +30,39 @@ namespace ClinicWebApp.Controllers
                 NumberOfSlots = NumOfSlots
             };
 
-            // Returns a 200 OK response when the clinic is successfully added
-            return Ok();
+            // Calling the synchronous AddClinic method of the clinic service
+            _clinicService.AddClinic(clinic);
+
+            // Returns a Created response indicating that the resource was successfully created
+            return CreatedAtAction(nameof(GetClinic), new { clinicId = clinic.CID }, clinic);
         }
 
         // Endpoint to retrieve a clinic by its unique ID
         [HttpGet("{clinicId}")]
-        public void GetClinic(int clinicId)
+        public ActionResult<Clinic> GetClinic(int clinicId)
         {
             // Retrieves the clinic by ID from the clinic service
-            _clinicService.GetClinicById(clinicId);
+            var clinic = _clinicService.GetClinicById(clinicId);
 
+            if (clinic == null)
+            {
+                return NotFound(); // Returns a 404 if the clinic is not found
+            }
+
+            // Returns the clinic as a 200 OK response
+            return Ok(clinic);
         }
 
         // Endpoint to retrieve all clinics
         [HttpGet]
-        public void GetAllClinics()
+        public ActionResult<IEnumerable<Clinic>> GetAllClinics()
         {
             // Retrieves all clinics from the clinic service
-            _clinicService.GetAllClinics();
+            var clinics = _clinicService.GetAllClinics();
+
+            // Returns the clinics as a 200 OK response
+            return Ok(clinics);
         }
     }
+
 }

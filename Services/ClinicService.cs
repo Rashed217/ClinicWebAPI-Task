@@ -20,23 +20,22 @@ namespace ClinicWebApp.Services
         // Method to add a new clinic by delegating the operation to the repository
         public void AddClinic(Clinic clinic)
         {
-            // Calls the AddClinicAsync method of the clinic repository to add the clinic
+            // Calls the AddClinic method of the clinic repository to add the clinic
             _clinicRepo.AddClinic(clinic);
         }
 
         // Method to retrieve a clinic by its unique ID by delegating the operation to the repository
-        public void GetClinicById(int clinicId)
+        public Clinic GetClinicById(int clinicId)
         {
-            // Calls the GetClinicByIdAsync method of the clinic repository to get the clinic by ID
-            _clinicRepo.GetClinicById(clinicId);
+            // Calls the GetClinicById method of the clinic repository to get the clinic by ID
+            return _clinicRepo.GetClinicById(clinicId);
         }
 
         // Method to retrieve all clinics by delegating the operation to the repository
         public IEnumerable<Clinic> GetAllClinics()
         {
-            // Calls the GetAllClinicsAsync method of the clinic repository to get a list of all clinics
+            // Calls the GetAllClinics method of the clinic repository to get a list of all clinics
             return _clinicRepo.GetAllClinics();
         }
     }
-
 }

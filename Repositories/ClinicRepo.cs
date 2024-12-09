@@ -38,10 +38,8 @@ namespace ClinicWebApp.Repositories
         // Method to retrieve all Clinics from the database
         public IEnumerable<Clinic> GetAllClinics()
         {
-            // Retrieves all clinics from the Clinics DbSet
-            // The ToListAsync method converts the DbSet into a list of clinics
+            // Retrieves all clinics from the Clinics DbSet synchronously
             return _context.Clinics.ToList();
         }
     }
-
 }

@@ -22,7 +22,7 @@ namespace ClinicWebApp.Controllers
 
         // Endpoint to book an appointment by accepting a Booking object in the request body
         [HttpPost("book")]
-        public async Task<IActionResult> BookAppointment(int patientID, int clinicID, DateTime date, int slotNumber)
+        public IActionResult BookAppointment(int patientID, int clinicID, DateTime date, int slotNumber)
         {
             var booking = new Booking
             {
@@ -32,16 +32,19 @@ namespace ClinicWebApp.Controllers
                 SlotNumber = slotNumber
             };
 
+            // Calling the service method synchronously
+            _bookingService.BookAppointment(booking);
+
             // Returns a 200 OK response when the appointment is successfully booked
             return Ok();
         }
 
         // Endpoint to retrieve all appointments for a specific clinic by clinic ID
         [HttpGet("appointmentsByClinic/{clinicId}")]
-        public async Task<ActionResult<IEnumerable<Booking>>> GetAppointmentsByClinic(int clinicId)
+        public ActionResult<IEnumerable<Booking>> GetAppointmentsByClinic(int clinicId)
         {
             // Retrieves appointments for the given clinic ID from the booking service
-            var appointments = await _bookingService.GetAppointmentsByClinic(clinicId);
+            var appointments = _bookingService.GetAppointmentsByClinic(clinicId); // Calling synchronously
 
             // Returns the appointments as a 200 OK response
             return Ok(appointments);
@@ -49,10 +52,10 @@ namespace ClinicWebApp.Controllers
 
         // Endpoint to retrieve all appointments for a specific patient by patient ID
         [HttpGet("appointmentsByPatient/{patientId}")]
-        public async Task<ActionResult<IEnumerable<Booking>>> GetAppointmentsByPatient(int patientId)
+        public ActionResult<IEnumerable<Booking>> GetAppointmentsByPatient(int patientId)
         {
             // Retrieves appointments for the given patient ID from the booking service
-            var appointments = await _bookingService.GetAppointmentsByPatient(patientId);
+            var appointments = _bookingService.GetAppointmentsByPatient(patientId); // Calling synchronously
 
             // Returns the appointments as a 200 OK response
             return Ok(appointments);

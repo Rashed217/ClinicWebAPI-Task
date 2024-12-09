@@ -4,8 +4,8 @@ namespace ClinicWebApp.Services
 {
     public interface IBookingService
     {
-        Task BookAppointment(Booking booking);
-        Task<IEnumerable<Booking>> GetAppointmentsByClinic(int clinicId);
-        Task<IEnumerable<Booking>> GetAppointmentsByPatient(int patientId);
+        void BookAppointment(Booking booking);
+        List<Booking> GetAppointmentsByClinic(int clinicId);
+        List<Booking> GetAppointmentsByPatient(int patientId);
     }
 }

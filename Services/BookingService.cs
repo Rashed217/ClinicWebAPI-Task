@@ -18,26 +18,24 @@ namespace ClinicWebApp.Services
         }
 
         // Method to book an appointment by delegating the operation to the repository
-        public Task BookAppointment(Booking booking)
+        public void BookAppointment(Booking booking)
         {
-            // Calls the BookAppointmentAsync method of the booking repository
-            return _bookingRepo.BookAppointmentAsync(booking);
+            // Calls the synchronous BookAppointment method of the booking repository
+            _bookingRepo.BookAppointment(booking);
         }
 
         // Method to retrieve all appointments for a specific clinic by delegating the operation to the repository
-        public Task<IEnumerable<Booking>> GetAppointmentsByClinic(int clinicId)
+        public List<Booking> GetAppointmentsByClinic(int clinicId)
         {
-            // Calls the GetAppointmentsByClinicAsync method of the booking repository
-            return _bookingRepo.GetAppointmentsByClinicAsync(clinicId);
+            // Calls the synchronous GetAppointmentsByClinic method of the booking repository
+            return _bookingRepo.GetAppointmentsByClinic(clinicId);
         }
 
         // Method to retrieve all appointments for a specific patient by delegating the operation to the repository
-        public Task<IEnumerable<Booking>> GetAppointmentsByPatient(int patientId)
+        public List<Booking> GetAppointmentsByPatient(int patientId)
         {
-            // Calls the GetAppointmentsByPatientAsync method of the booking repository
-            return _bookingRepo.GetAppointmentsByPatientAsync(patientId);
+            // Calls the synchronous GetAppointmentsByPatient method of the booking repository
+            return _bookingRepo.GetAppointmentsByPatient(patientId);
         }
-
     }
-
 }

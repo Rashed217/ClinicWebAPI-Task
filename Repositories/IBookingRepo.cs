@@ -4,8 +4,8 @@ namespace ClinicWebApp.Repositories
 {
     public interface IBookingRepo
     {
-        Task BookAppointmentAsync(Booking booking);
-        Task<IEnumerable<Booking>> GetAppointmentsByClinicAsync(int clinicId);
-        Task<IEnumerable<Booking>> GetAppointmentsByPatientAsync(int patientId);
+        void BookAppointment(Booking booking);
+        List<Booking> GetAppointmentsByClinic(int clinicId);
+        List<Booking> GetAppointmentsByPatient(int patientId);
     }
 }

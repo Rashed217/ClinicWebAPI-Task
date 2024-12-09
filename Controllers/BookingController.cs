@@ -50,6 +50,17 @@ namespace ClinicWebApp.Controllers
             return Ok(appointments);
         }
 
+        [HttpGet("appointmentsByPatientName/{patientName}")]
+        public ActionResult<IEnumerable<Booking>> GetAppointmentsByPatientName(string patientName)
+        {
+            var appointments = _bookingService.GetAppointmentsByPatientName(patientName);
+            if (appointments == null || !appointments.Any())
+            {
+                return NotFound();
+            }
+            return Ok(appointments);
+        }
+
         // Endpoint to retrieve all appointments for a specific patient by patient ID
         [HttpGet("appointmentsByPatient/{patientId}")]
         public ActionResult<IEnumerable<Booking>> GetAppointmentsByPatient(int patientId)

@@ -31,6 +31,11 @@ namespace ClinicWebApp.Services
             return _bookingRepo.GetAppointmentsByClinic(clinicId);
         }
 
+        public IEnumerable<Booking> GetAppointmentsByPatientName(string patientName)
+        {
+            return _bookingRepo.GetAppointmentsByPatientName(patientName);
+        }
+
         // Method to retrieve all appointments for a specific patient by delegating the operation to the repository
         public List<Booking> GetAppointmentsByPatient(int patientId)
         {

@@ -47,6 +47,15 @@ namespace ClinicWebApp.Repositories
                 .ToList();                          // Converts the result to a list synchronously
         }
 
+        public IEnumerable<Booking> GetAppointmentsByPatientName(string patientName)
+        {
+            return _context.Bookings
+                .Where(b => b.Patient.Name.ToLower() == patientName.ToLower())
+                .Include(b => b.Patient)  // Include the related patient data
+                .ToList();
+        }
+
+
         // Method to retrieve all appointments (bookings) for a specific patient
         public List<Booking> GetAppointmentsByPatient(int patientId)
         {

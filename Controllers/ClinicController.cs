@@ -107,5 +107,24 @@ namespace ClinicWebApp.Controllers
                 return StatusCode(500, new { message = "An unexpected error occurred while retrieving the clinics.", details = ex.Message });
             }
         }
+
+        // Endpoint to remove a clinic by its specialization (name)
+        [HttpDelete("remove/{specialization}")]
+        public IActionResult RemoveClinicByName(string specialization)
+        {
+            try
+            {
+                // Attempt to remove the clinic
+                _clinicService.RemoveClinicByName(specialization);
+
+                // Return a success response
+                return Ok(new { message = "Clinic removed successfully." });
+            }
+            catch (Exception ex)
+            {
+                // Catch any unexpected errors and return a 500 Internal Server Error
+                return StatusCode(500, new { message = "An unexpected error occurred while removing the clinic.", details = ex.Message });
+            }
+        }
     }
 }

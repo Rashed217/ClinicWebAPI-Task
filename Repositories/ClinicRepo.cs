@@ -41,5 +41,16 @@ namespace ClinicWebApp.Repositories
             // Retrieves all clinics from the Clinics DbSet synchronously
             return _context.Clinics.ToList();
         }
+
+        // Method to remove a clinic by its name (specialization)
+        public void RemoveClinicByName(string specialization)
+        {
+            var clinic = _context.Clinics.FirstOrDefault(c => c.Specialization == specialization);
+            if (clinic != null)
+            {
+                _context.Clinics.Remove(clinic);
+                _context.SaveChanges();
+            }
+        }
     }
 }

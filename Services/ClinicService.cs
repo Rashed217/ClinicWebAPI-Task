@@ -1,5 +1,6 @@
 ﻿using ClinicWebApp.Models;
 using ClinicWebApp.Repositories;
+using Microsoft.EntityFrameworkCore;
 
 namespace ClinicWebApp.Services
 {
@@ -36,6 +37,12 @@ namespace ClinicWebApp.Services
         {
             // Calls the GetAllClinics method of the clinic repository to get a list of all clinics
             return _clinicRepo.GetAllClinics();
+        }
+
+        // Method to remove a clinic by its specialization
+        public void RemoveClinicByName(string specialization)
+        {
+            _clinicRepo.RemoveClinicByName(specialization);
         }
     }
 }

@@ -7,5 +7,6 @@ namespace ClinicWebApp.Repositories
         void AddClinic(Clinic clinic);
         IEnumerable<Clinic> GetAllClinics();
         Clinic GetClinicById(int clinicId);
+        void RemoveClinicByName(string specialization);
     }
 }

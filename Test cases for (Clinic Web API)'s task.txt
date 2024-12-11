@@ -1,0 +1,42 @@
+Test cases for (Clinic Web API)'s task:
+
+
+Test to pass:
+
+(For Patient)
+
+- Add patient (Tasted = Working)
+- Get Patient By ID (Tested = Working)
+- Get all patients (Tested = Working)
+
+(For Clinic)
+
+- Add clinic (Tested = Working)
+- Get clinic by ID (Tested = Working)
+- Get all clinics (Tested = Working)
+
+(For Bookings)
+
+- Book an appointment (Tested = Working)
+- Get appointment by clinic's ID (Tested = Working)
+- Get appointment by patient's name (Tested = Working)
+- Get appointment by patient's ID (Tested = Working)
+
+
+Test to fail:
+
+(For Booking)
+
+- Give a wrong Patient's ID while booking an appointment (Handled)
+- Book an appointment two times same patient, same date (Handled)
+- Give an appointment's date from the past (Handled)
+- Give duplicated slot number on the same date (Handled)
+- Try to get an appointment for a non exist clinic's ID (Handled)
+- Try to get an appointment for a non exist patient's name (Handled)
+- Try to get an appointment for a non exist patient's ID (Handled)
+
+
+(For Clinic)
+
+- 
+

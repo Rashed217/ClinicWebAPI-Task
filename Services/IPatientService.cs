@@ -7,5 +7,6 @@ namespace ClinicWebApp.Services
         void AddPatient(Patient patient);
         IEnumerable<Patient> GetAllPatients();
         Patient GetPatientById(int patientId);
+        void RemovePatientByName(string name);
     }
 }

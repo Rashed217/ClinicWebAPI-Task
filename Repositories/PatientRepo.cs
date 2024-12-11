@@ -41,7 +41,18 @@ namespace ClinicWebApp.Repositories
             // Retrieves all patients from the Patients DbSet
             return _context.Patients.ToList();
         }
-    }
 
+        // Method to remove a patients by their name
+        public void RemovePatientByName(string name)
+        {
+            var patient = _context.Patients.FirstOrDefault(p => p.Name == name);
+            if (name != null)
+            {
+                _context.Patients.Remove(patient);
+                _context.SaveChanges();
+            }
+        }
+
+    }
 
 }

@@ -37,6 +37,11 @@ namespace ClinicWebApp.Services
             // Calls the GetAllPatients method of the patient repository to get a list of all patients
             return _patientRepo.GetAllPatients();
         }
-    }
 
+        // Method to remove a clinic by its specialization
+        public void RemovePatientByName(string specialization)
+        {
+            _patientRepo.RemovePatientByName(specialization);
+        }
+    }
 }

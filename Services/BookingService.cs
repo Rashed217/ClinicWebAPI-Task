@@ -20,7 +20,31 @@ namespace ClinicWebApp.Services
         // Method to book an appointment by delegating the operation to the repository
         public void BookAppointment(Booking booking)
         {
-            // Calls the synchronous BookAppointment method of the booking repository
+            // 1. Check if the patient's ID is duplicated
+            if (_bookingRepo.IsPatientDuplicate(booking.PatientID))
+            {
+                throw new InvalidOperationException("This patient has already booked an appointment.");
+            }
+
+            // 2. Check if the clinic's ID is duplicated
+            if (_bookingRepo.IsClinicDuplicate(booking.ClinicID))
+            {
+                throw new InvalidOperationException("This clinic is already fully booked for this appointment.");
+            }
+
+            // 3. Ensure the appointment date is in the future
+            if (booking.Date < DateTime.Now)
+            {
+                throw new ArgumentException("Appointment date cannot be in the past.");
+            }
+
+            // 4. Check if the slot number is already booked or all slots are taken
+            if (_bookingRepo.IsSlotTaken(booking.ClinicID, booking.SlotNumber))
+            {
+                throw new InvalidOperationException($"The slot number {booking.SlotNumber} is already taken.");
+            }
+
+            // If all checks pass, book the appointment
             _bookingRepo.BookAppointment(booking);
         }
 

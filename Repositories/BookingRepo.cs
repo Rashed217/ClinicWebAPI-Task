@@ -9,6 +9,7 @@ namespace ClinicWebApp.Repositories
     {
         // ApplicationDbContext instance used to interact with the database
         private readonly ApplicationDbContext _context;
+        private DateTime AppointmentSpecificTime;
 
         // Constructor that accepts an ApplicationDbContext and initializes the _context field
         // This allows dependency injection of the database context into the repository
@@ -18,6 +19,26 @@ namespace ClinicWebApp.Repositories
         }
 
         // Method to book an appointment by adding a new Booking to the database
+
+        public bool IsPatientDuplicate(int patientId)
+        {
+            // Logic to check if the patient has already booked an appointment.
+            return _context.Bookings.Any(b => b.PatientID == patientId && b.Date == AppointmentSpecificTime);
+        }
+
+        public bool IsClinicDuplicate(int clinicId)
+        {
+            // Logic to check if the clinic is fully booked for the given time.
+            // This depends on your business logic (e.g., check the time slots for availability).
+            return _context.Bookings.Any(b => b.ClinicID == clinicId && b.Date == AppointmentSpecificTime);
+        }
+
+        public bool IsSlotTaken(int clinicId, int slotNumber)
+        {
+            // Logic to check if the slot number is already booked.
+            return _context.Bookings.Any(b => b.ClinicID == clinicId && b.SlotNumber == slotNumber && b.Date == AppointmentSpecificTime);
+        }
+
         public void BookAppointment(Booking booking)
         {
             // Ensure that the number of available slots in the associated clinic is not exceeded
@@ -66,5 +87,4 @@ namespace ClinicWebApp.Repositories
                 .ToList();                            // Converts the result to a list synchronously
         }
     }
-
 }

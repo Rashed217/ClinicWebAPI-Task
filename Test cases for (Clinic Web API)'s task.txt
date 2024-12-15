@@ -35,8 +35,3 @@ Test to fail:
 - Try to get an appointment for a non exist patient's name (Handled)
 - Try to get an appointment for a non exist patient's ID (Handled)
 
-
-(For Clinic)
-
-- 
-
